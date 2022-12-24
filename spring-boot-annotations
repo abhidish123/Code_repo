@@ -1,0 +1,19 @@
+@SpringBootApplication = @EnableAutoConfiguration + @ComponentScan + @Configuration
+
+@Configuration = can be applied for any class which marks it as source of bean definition, i.e it has methods which returns Java beans(class objects).
+              => Inside a @Configuration class, for every method, we use @Bean
+  
+@Autowired = used for injecting the object/beans which gets created from the @Configuration class, basically we can create class's object and access its methods.
+
+@Component = By using this for a class, we tell spring spring to manage the object lifecycle i.e object creation, 
+             thus no need for making (@Configuration class + defining @Bean methods)
+
+@ComponentScan = When we create a new package outside the main package (i.e outer directory), then spring not able to scan that new class even if we use @Component.
+            Thus, we need to use @ComponentScan(basePackages = {<new_package1>, <new_package2>,...}) in the main package, to be able to access methods in new class.
+            
+@Qualifier = If there are 2 beans which returns same object type, then on instantiating/injecting an object of that class, bean confict occurs. 
+            Hence, for beans which returns same object type, we make use of @Bean("<some_id>"), and at the place 
+            where we instantiate/inject the object, use @Qualifier("<some_id>").
+            
+@Lazy = used to lazily create object, used alongwith @Bean.
+
